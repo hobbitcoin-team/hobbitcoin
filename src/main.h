@@ -25,8 +25,6 @@ class CNode;
 
 struct CBlockIndexWorkComparator;
 
-/** Official genesis block hash **/
-static const uint256 hashGenesisBlockOfficial("0x1e7f66e11bfd56faf5eb47a68aaeb6bb35a1cd0d3baa15cfa379b2760472ddca");
 /** The maximum allowed size for a serialized block, in bytes (network rule) */
 static const unsigned int MAX_BLOCK_SIZE = 1000000;                      // 1000KB block hard limit
 /** Obsolete: maximum size for mined blocks */

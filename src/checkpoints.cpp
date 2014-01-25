@@ -9,6 +9,7 @@
 
 #include "main.h"
 #include "uint256.h"
+#include "controls.h"
 
 namespace Checkpoints
 {
@@ -33,10 +34,7 @@ namespace Checkpoints
     //   (no blocks before with a timestamp after, none after with
     //    timestamp before)
     // + Contains no strange transactions
-    static MapCheckpoints mapCheckpoints =
-        boost::assign::map_list_of
-        (     0, hashGenesisBlockOfficial)
-        ;
+    static MapCheckpoints mapCheckpoints = officialCheckpoints;
     static const CCheckpointData data = {
         &mapCheckpoints,
         1383887110, // * UNIX timestamp of last checkpoint block
@@ -45,11 +43,7 @@ namespace Checkpoints
         8000.0     // * estimated number of transactions per day after checkpoint
     };
 
-    static MapCheckpoints mapCheckpointsTestnet = 
-        boost::assign::map_list_of
-        (   546, uint256("000000002a936ca763904c3c35fce2f3556c559c0214345d31b1bcebf76acb70"))
-        ( 35000, uint256("2af959ab4f12111ce947479bfcef16702485f04afd95210aa90fde7d1e4a64ad"))
-        ;
+    static MapCheckpoints mapCheckpointsTestnet = testCheckpoints;
     static const CCheckpointData dataTestnet = {
         &mapCheckpointsTestnet,
         1369685559,
@@ -67,6 +61,11 @@ namespace Checkpoints
     bool CheckBlock(int nHeight, const uint256& hash)
     {
         if (fTestNet) return true; // Testnet has no checkpoints
+
+        if (INIT_MODE)
+            return true;
+
+
         if (!GetBoolArg("-checkpoints", true))
             return true;
 
@@ -114,6 +113,10 @@ namespace Checkpoints
         if (!GetBoolArg("-checkpoints", true))
             return 0;
 
+        if (INIT_MODE)
+            return 0;
+
+
         const MapCheckpoints& checkpoints = *Checkpoints().mapCheckpoints;
 
         return checkpoints.rbegin()->first;
@@ -124,6 +127,9 @@ namespace Checkpoints
         if (fTestNet) return NULL; // Testnet has no checkpoints
         if (!GetBoolArg("-checkpoints", true))
             return NULL;
+        if (INIT_MODE)
+            return NULL;
+
 
         const MapCheckpoints& checkpoints = *Checkpoints().mapCheckpoints;
 

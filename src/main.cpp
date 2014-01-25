@@ -17,6 +17,7 @@
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/uniform_int_distribution.hpp>
 #include "scrypt.h"
+#include "controls.h"
 
 
 using namespace std;
@@ -2771,7 +2772,7 @@ bool LoadBlockIndex()
         pchMessageStart[1] = 0xc1;
         pchMessageStart[2] = 0xb7;
         pchMessageStart[3] = 0xdc;
-        hashGenesisBlock = uint256("0x6c62fab347c1461fa44736cde2ecf6d115774dd90c273c7fc227f84f8496085c");
+        hashGenesisBlock = hashGenesisBlockTest;
     }
 
     //
@@ -2818,12 +2819,12 @@ bool InitBlockIndex() {
         block.nVersion = 1;
         block.nTime    = 1388093281;
         block.nBits    = 0x1e0ffff0;
-        block.nNonce   = 2085272652;
+        block.nNonce   = genesisNonceOfficial;
 
         if (fTestNet)
         {
-            block.nTime    = 1388093281;
-            block.nNonce   = 385795638;
+            block.nTime    = 0;
+            block.nNonce   = genesisNonceTest;
         }
 
         //// debug print
@@ -2831,10 +2832,10 @@ bool InitBlockIndex() {
         printf("%s\n", hash.ToString().c_str());
         printf("%s\n", hashGenesisBlock.ToString().c_str());
         printf("%s\n", block.hashMerkleRoot.ToString().c_str());
-        assert(block.hashMerkleRoot == uint256("0x3a4b745e36f20d3cb2e7bcbb23388712c706219357be7bbc3b1ce9f66fca7ce9"));
+        assert(block.hashMerkleRoot == hashMerkleRootOfficial);
         block.print();
 
-        if (false && block.GetHash() != hashGenesisBlock)
+        if (INIT_MODE && block.GetHash() != hashGenesisBlock)
                 {
                     printf("Searching for genesis block...\n");
                     // This will figure out a valid hash and Nonce if you're

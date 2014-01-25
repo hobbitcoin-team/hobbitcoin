@@ -154,6 +154,7 @@ HEADERS += src/qt/bitcoingui.h \
     src/checkpoints.h \
     src/coincontrol.h \
     src/compat.h \
+    src/controls.h \
     src/sync.h \
     src/util.h \
     src/hash.h \
