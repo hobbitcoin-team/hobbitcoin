@@ -17,9 +17,9 @@ Hobbitcoin is a lite version of Bitcoin using scrypt as a proof-of-work algorith
  - 1000 coins per block with an additional 50,000 bonus payout possible based on the current block number
     - 0-100,000 blocks => 50% chance of 50,000 bonus
     - 100,000-200,000 blocks => 25% chance of 50,000 bonus
-    - 200,000-300,000 blocks => 25% chance of 50,000 bonus
-    - 300,000-400,000 blocks => 15% chance of 50,000 bonus
-    - 400,000-500,000 blocks => 10% chance of 50,000 bonus
+    - 200,000-300,000 blocks => 15% chance of 50,000 bonus
+    - 300,000-400,000 blocks => 10% chance of 50,000 bonus
+    - 400,000-500,000 blocks => 5% chance of 50,000 bonus
     - 500,000-600,000 blocks => 5% chance of 50,000 bonus
     - 600,000-700,000 blocks => 5% chance of 50,000 bonus
     - 700,000-800,000 blocks => 5% chance of 50,000 bonus
